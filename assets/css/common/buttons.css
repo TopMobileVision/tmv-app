@@ -1,0 +1,16 @@
+button.tab {
+  background: white;
+  color: var(--color-pri);
+  border-width: 0;
+  margin: 0;
+  
+  border-radius: 5px;
+  line-height: 150%;
+
+  transition: background-color 0.5s;
+}
+
+button.tab.selected {
+  background: var(--color-pri);
+  color: white;
+}

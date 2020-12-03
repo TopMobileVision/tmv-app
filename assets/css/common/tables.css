@@ -1,0 +1,48 @@
+/* the table itself */
+.table-small {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  width: 95%;
+  margin-left: 0.75em;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  
+}
+/* header */
+.table-small thead tr {
+  background-color: var(--color-pri);
+  color: var(--color-text-bright);
+  text-align: left;
+  font-weight: bold;
+  
+}
+/* header cols */
+.table-small thead tr th {
+  padding: 5px;
+  padding-left: 14px;
+  border-bottom: 0px;
+  margin-bottom: 0px;
+}
+/* rows */
+.table-small td {
+  border-bottom: 1px solid var(--color-gray-light);
+  text-transform: uppercase;
+}
+/* even rows (from 0) */
+.table-small tbody tr:nth-of-type(even) {
+  background-color: var(--color-text-bright);
+}
+/* last row, last head row */
+.table-small tbody tr:last-of-type, .table-small thead tr:last-of-type {
+  border-bottom: 2px solid var(--color-pri);
+}
+/* body row: hover */
+.table-small tbody tr:hover {
+  font-weight: bold;
+  color: var(--color-pri);
+}
+/* last column
+.table-small thead tr th:last-child, .table-small tbody tr td:last-child {
+  
+}*/
