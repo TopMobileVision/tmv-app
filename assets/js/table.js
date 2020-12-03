@@ -1,6 +1,5 @@
 var table_items = [];
 
-
 const generate_row = (obj) => {
     return `<tr><td>${obj.address}</td><td>Some Info</td></tr>`
 }
