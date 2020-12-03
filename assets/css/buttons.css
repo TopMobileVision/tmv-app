@@ -14,3 +14,12 @@ button.tab.selected {
   background: var(--color-pri);
   color: white;
 }
+
+button.tab.filter {
+  background: white;
+}
+
+button.tab.filter:hover {
+  background: tomato;
+  color: white;
+}

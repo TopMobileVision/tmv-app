@@ -1,6 +1,6 @@
 {
     "trucks": [
-        {"id": "PLATE NUM", "cams": [{"id": "1.2.3.4"}, {"id": "127.0.0.1"}]}
+        {"id": 0, "address": "PLATE NUM", "name": "Torero", "cams": [{"id": "1.2.3.4"}, {"id": "127.0.0.1"}]}
     ],
     "customers": [
         {"id": 1, "address": "1234 Alcala Park", "name": "USD"},

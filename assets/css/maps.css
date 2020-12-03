@@ -1,0 +1,29 @@
+.maps {
+    background:linear-gradient(90deg, #4285f4, #0F9D58, #DB4437);
+
+    background-size: 400%;
+
+
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    vertical-align: middle;
+    
+    -webkit-animation: animation_bg 1s ease infinite;
+    animation: animation_bg 15s ease infinite;
+
+    justify-content: center;
+
+    font-size: 2.4em;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+@keyframes animation_bg { 
+    0%   {background-position: 0 0;}
+    25% {background-position: 50% 0;}
+    50% {background-position: 90% 0;}
+    60% {background-position: 60%;}
+    75% {background-position: 40%;}
+    100%  {background-position: 0 0;}
+}

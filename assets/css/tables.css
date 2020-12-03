@@ -1,3 +1,7 @@
+#table-container {
+  max-height: 300px;
+}
+
 /* the table itself */
 .table-small {
   border-collapse: collapse;
@@ -17,6 +21,11 @@
   font-weight: bold;
   
 }
+
+.table-small tbody {
+  overflow-x: hidden;
+  height: 300px;
+}
 /* header cols */
 .table-small thead tr th {
   padding: 5px;
@@ -29,6 +38,7 @@
   border-bottom: 1px solid var(--color-gray-light);
   text-transform: uppercase;
 }
+
 /* even rows (from 0) */
 .table-small tbody tr:nth-of-type(even) {
   background-color: var(--color-text-bright);
@@ -39,10 +49,10 @@
 }
 /* body row: hover */
 .table-small tbody tr:hover {
-  font-weight: bold;
-  color: var(--color-pri);
+  background-color: var(--color-pri);
+  color: white;
 }
-/* last column
+/* last column */
 .table-small thead tr th:last-child, .table-small tbody tr td:last-child {
-  
-}*/
+  width: 40%;
+}
