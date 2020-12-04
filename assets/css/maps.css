@@ -2,7 +2,7 @@
     background:linear-gradient(90deg, #4285f4, #0F9D58, #DB4437);
 
     background-size: 400%;
-
+    height: 85vh;
 
     border-radius: 5px;
     text-align: center;
@@ -25,5 +25,5 @@
     50% {background-position: 90% 0;}
     60% {background-position: 60%;}
     75% {background-position: 40%;}
-    100%  {background-position: 0 0;}
+    100% {background-position: 0 0;}
 }
