@@ -6,8 +6,6 @@
 .table-small {
   border-collapse: collapse;
   font-size: 0.9em;
-  width: 95%;
-  margin-left: 0.75em;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
