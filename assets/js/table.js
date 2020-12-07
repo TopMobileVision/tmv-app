@@ -62,3 +62,7 @@ function set_table_rows(rows) {
         $('.table-small tbody').append(rows);
     }
 }
+
+$('.header').click(function(){
+    $(this).toggleClass('expand').nextUntil('tr.header').slideToggle(100);
+});
