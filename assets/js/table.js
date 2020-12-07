@@ -1,7 +1,13 @@
 var table_items = [];
 
 const generate_row = (obj) => {
-    return `<tr><td>${obj.address}</td><td>Some Info</td></tr>`
+    return `<tr class="header expand">
+    <td><span class="sign"></span>${obj.address}</td>
+    <td>Some Info</td>
+    <tr>
+        <td>Extra info</td>
+    </tr>
+    </tr>`
 }
 
 $('button.tab').click( () => {
