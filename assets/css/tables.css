@@ -40,7 +40,8 @@
   background-color: var(--color-text-bright);
 }
 /* last row, last head row */
-.table-small tbody tr:last-of-type, .table-small thead tr:last-of-type {
+.table-small tbody tr:last-of-type,
+.table-small thead tr:last-of-type {
   border-bottom: 2px solid var(--color-pri);
 }
 /* body row: hover */
@@ -49,41 +50,41 @@
   color: white;
 }
 /* last column */
-.table-small thead tr th:last-child, .table-small tbody tr td:last-child {
+.table-small thead tr th:last-child,
+.table-small tbody tr td:last-child {
   width: 40%;
 }
 
 /* highlight table row text */
-#table-container > table > tbody > tr > td { 
-  cursor: pointer; 
+#table-container > table > tbody > tr > td {
+  cursor: pointer;
   transition: all 0.25s ease-out;
 }
 
 /*right arrow, placed before text*/
-.header .sign::before{
-content: ' ';
-display: inline-block;
-/* this isn't an actual arrow. it uses border shading */
-border-top: 5px solid transparent; 
-border-bottom: 5px solid transparent; 
-/* triangle is same color as table row text color */
-border-left: 5px solid currentColor; 
-vertical-align: middle;
-margin-right: .7rem; 
-transform: translateY(-2px); 
-transition: transform .2s ease-out;
+.header .sign::before {
+  content: " ";
+  display: inline-block;
+  /* this isn't an actual arrow. it uses border shading */
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  /* triangle is same color as table row text color */
+  border-left: 5px solid currentColor;
+  vertical-align: middle;
+  margin-right: 0.7rem;
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-out;
 }
 
-
 /* down arrow, placed before text */
-.header.expand .sign::before{
-content: ' ';
-width: 0; 
-height: 0; 
-border-left: 5px solid transparent;
-border-right: 5px solid transparent;
-border-top: 5px solid currentColor;
-margin-right: .7rem; 
-transform: translateY(-2px); 
-transition: transform .2s ease-out;
-} 
+.header.expand .sign::before {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+  margin-right: 0.7rem;
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-out;
+}
