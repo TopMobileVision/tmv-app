@@ -5,7 +5,7 @@ const generate_row = (obj) => {
     <td><span class="sign"></span>${obj.address}</td>
     <td>Some Info</td>
     <tr>
-        <td>Extra info</td>
+        <td colspan="2">Extra info</td>
     </tr>
     </tr>`
 }
@@ -53,7 +53,8 @@ $('#search-bar').keyup( () => {
 
     const results = table_items.filter(item => item.address.toUpperCase().includes(input) || item.name.toUpperCase().includes(input));
 
-    const rows    = results.map(generate_row);
+    const rows    = [results[0], generate_row(results[1])]
+    // const rows    = results.map(generate_row); 
 
     set_table_rows(rows);
 
