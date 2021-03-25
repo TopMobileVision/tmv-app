@@ -1,0 +1,16 @@
+{
+    "cards":
+    {
+        "time": "10:37AM",
+        "date": "Mar. 22",
+        "code": "QRCODE1",
+        "save": "Download",
+        "shre": "Share"
+    },
+    "address": "305 Hwy 101, Solana Beach, CA 92075",
+    "previous_lifts":
+    {
+        "Mar 13": "https://google.com",
+        "Mar 12": "https://google.com"
+    }
+}
