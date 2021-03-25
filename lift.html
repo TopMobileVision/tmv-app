@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="stylesheet" href="assets/css/lift.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/tables.css">
+        <link rel="stylesheet" href="assets/css/buttons.css">
+        <link rel="stylesheet" href="assets/css/colors.css">
+        <link rel="stylesheet" href="assets/css/navbar.css">
+        <link rel="stylesheet" href="assets/css/containers.css">
+        
+    </head>
+
+    <body>
+        <!-- NAVIGATION BAR -->
+        <nav class="navbar navbar-light navbar-expand-md">
+            <div class="container-fluid"><a class="navbar-brand" href="#">TMV</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse"
+                    id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                        <input type="search" id="search-bar" placeholder="Search anything"></div>
+                    </ul>
+            </div>
+        </nav>
+
+        <div class="grid-container">
+
+            <div class="grid-title">
+                <!-- The title: address  -->
+                <h1 id="title">1234 Linda Vista</h1>
+            </div>
+            
+            <div class="grid-item grid-video"> 
+                <!-- Video placeholder  -->
+                <!--video src="https://www.youtube.com/embed/EFafSYg-PkI" frameborder="0"></video-->
+            </div>
+
+            <div class="grid-item grid-history">
+
+                <div id="table-container">
+                    <table class="table table-small" id="history">
+                        <!-- TABLE HEADER -->
+                        <thead>
+                            <tr>
+                                <th id="h-title">Previous lifts:</th>
+                            </tr>
+                        </thead>
+    
+                        <!-- TABLE BODY -->
+                        <tbody>
+                            
+                            <tr><td>3/30</td></tr>
+                            <tr><td>3/26</td></tr>
+                            <tr><td>3/25</td></tr>
+                            <tr><td>3/24</td></tr>
+                            <tr><td>3/23</td></tr>
+                            <tr><td>3/22</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid-item grid-details">
+                
+                <div class="info-card">
+                    <span>12:49PM<br></span>
+                </div>
+
+                <div class="info-card">
+                    <span>View lift<br>location</span>
+                </div>
+
+                <div class="info-card">
+                    <span>ABCDE123<br>bin ID</span>
+                </div>
+
+                <div class="info-card">
+                    <span>Download<br>video</span>
+                </div>
+
+                <div class="info-card">
+                    <span>Share<br>video</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- IMPORT SCRIPTS -->
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- our code -->
+        <script src="assets/js/lift.js"></script>
+    </body>
+</html>
+

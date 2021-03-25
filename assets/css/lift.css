@@ -1,0 +1,44 @@
+
+.grid-container {
+    margin: 20px auto;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 0.3fr 2fr 1fr;
+
+    grid-template-areas: 
+        "title title"
+        "video history"
+        "details .";
+
+    grid-gap: 10px;
+    max-width: 800px;
+}
+
+.grid-container div { overflow: hidden; }
+
+.grid-title { grid-area: title;}
+
+.grid-title h1 { font-size: large; }
+
+.grid-video { grid-area: video; outline: 1px dotted;}
+
+.grid-history { grid-area: history; }
+
+.grid-details { grid-area: details; }
+
+.info-card {
+    margin: 1px;
+    padding: 1%;
+    width: 90px;
+    height: 70px;
+    background-color: var(--color-pri);
+    color: var(--color-text-bright);
+    border-radius: 10px;
+    display:inline-block;
+}
+
+.info-card > * {
+    font-size: small;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
