@@ -1,5 +1,6 @@
 :root {
     --color-gray-light: #dddddd;
     --color-text-bright: #f3f3f3;
+    --color-text-dark: rgba(18, 18, 49, 0.987);
     --color-pri: #009879;
 }
