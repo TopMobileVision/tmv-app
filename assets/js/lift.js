@@ -1,7 +1,7 @@
 "use strict";
 
 const generate_history = (history) => {
-    return `<tr><td><a href="${history[1]}">${history[0]}</a></td></tr>`
+    return `<tr><td><a>${history[0]}</a></td></tr>`
 }
 
 const generate_card = (card) => {
