@@ -32,8 +32,8 @@
     padding: 1%;
     width: 90px;
     height: 70px;
-    background-color: var(--color-pri);
-    color: var(--color-text-bright);
+    background-color: var(--color4);
+    color: var(--color1);
     border-radius: 10px;
     display:inline-block;
 }
