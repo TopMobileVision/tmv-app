@@ -1,6 +1,7 @@
 :root {
-    --color-gray-light: #dddddd;
-    --color-text-bright: #f3f3f3;
-    --color-text-dark: rgba(18, 18, 49, 0.987);
-    --color-pri: #009879;
+    --color0: #f4f4f2;
+    --color1: white;
+    --color2: #e8e8e8;
+    --color3: #bbbfca;
+    --color4: #121231;
 }
