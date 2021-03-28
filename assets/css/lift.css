@@ -47,3 +47,16 @@ video {
     width: 100%;
     height: 100%;
 }
+
+.grid-item.grid-history {
+    grid-area: 1 / 2 / auto / auto;
+    height: 100%;
+}
+
+#history {
+    height: 100%;
+}
+
+h1 {
+    color: var(--color4);
+}
