@@ -4,20 +4,25 @@ const generate_history = (history) => {
     return `<tr><td><a>${history[0]}</a></td></tr>`
 }
 
-const generate_card = (card) => {
-    return `<div class="info-card"><span>${card}</div>`
-}
-
 const generate_video = (url) => {
     return `<source src=".${url}" type="video/mp4"></source>`
 }
 
-$.getJSON('./assets/json/lift.json', json => {
+const generate_subtitle = (date) => {
+    const [month, day, year]    = date.toLocaleDateString("en-US").split("/")
+    const [hour, minute, second] = date.toLocaleTimeString("en-US").split(/:| /)
+    // TODO: PM/AM
+    return `<p style="color: var(--color3);">${month}/${day} at ${hour}:${minute}PM • ID QRCODE1</p>`
+}
+
+const url_api = 'http://35.227.154.149:8000/lifts/?lift_id=1';
+
+$.get(url_api, json => {
     
-    // extract lifts from JSON
+    // extract lift data from JSON
     const vid_url= json.vid_url;
     const address= json.address;
-    let   cards  = json.cards;
+    const date   = new Date(json.timestamp);
     const history= json.previous_lifts;
     
     // Set adddress title
@@ -25,13 +30,10 @@ $.getJSON('./assets/json/lift.json', json => {
     
     // Populate Previous Lifts table
     const rows = Object.entries(history).map(generate_history);
-    $('#history tbody').empty();
-    $('#history tbody').append(rows);
+    $('#history tbody').html(rows);
 
     // Generate info cards
-    cards = Object.values(cards).map(generate_card);
-    $('.grid-details').empty();
-    $('.grid-details').append(cards);
+    $('.grid-details').html(generate_subtitle(date));
 
     // Set the video player's url
     $('#vid_player').html(generate_video(vid_url));
