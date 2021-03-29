@@ -8,33 +8,32 @@ const generate_video = (url) => {
     return `<source src=".${url}" type="video/mp4"></source>`
 }
 
-const generate_subtitle = (date) => {
-    const [month, day, year]    = date.toLocaleDateString("en-US").split("/")
-    const [hour, minute, second] = date.toLocaleTimeString("en-US").split(/:| /)
-    // TODO: PM/AM
-    return `<p style="color: var(--color3);">${month}/${day} at ${hour}:${minute}PM • ID QRCODE1</p>`
+const generate_subtitle = (timestamp) => {
+    const date = new Date(timestamp);
+    const day = date.toLocaleDateString("en-US", {year: 'numeric', month: 'short', day: 'numeric'});
+    const time = date.toLocaleTimeString("en-US", {hour: 'numeric', minute:'numeric'})
+    return `<p style="color: var(--color3);">${day} • ${time} • BIN ID QRCODE1</p>`
 }
 
-const url_api = 'http://35.227.154.149:8000/lifts/?lift_id=1';
+const url_api = () => {
+    const params  = new URLSearchParams(window.location.search);
+    const lift_id = params.get('lift_id') || '';
+    return 'http://35.227.154.149:8000/lifts/?lift_id=' + lift_id
+};
 
-$.get(url_api, json => {
-    
-    // extract lift data from JSON
-    const vid_url= json.vid_url;
-    const address= json.address;
-    const date   = new Date(json.timestamp);
-    const history= json.previous_lifts;
+$.get(url_api(), lift => {
     
     // Set adddress title
-    $('#title').text(address.toUpperCase());
+    $('#title').text(lift.address.toUpperCase());
     
     // Populate Previous Lifts table
-    const rows = Object.entries(history).map(generate_history);
+    const history = Object.entries(lift.previous_lifts);
+    const rows = history.map(generate_history);
     $('#history tbody').html(rows);
 
     // Generate info cards
-    $('.grid-details').html(generate_subtitle(date));
+    $('.grid-details').html(generate_subtitle(lift.timestamp));
 
     // Set the video player's url
-    $('#vid_player').html(generate_video(vid_url));
+    $('#vid_player').html(generate_video(lift.vid_url));
 });
