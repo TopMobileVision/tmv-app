@@ -3,66 +3,84 @@ const generate_day = (day, len) => {
     return day == 'Yesterday' ? `<tr class="selected"><td><b>${day}</b><br>${len} bins</td></tr>` : `<tr><td>${day}<br>${len} bins</td></tr>` 
 };
 
-$.getJSON('./assets/json/recent_lifts.json', days => {
+const timestamp_to_time = (timestamp) => {
+    const date = new Date(timestamp*1000);
+    const [hour, minute, second] = date.toLocaleTimeString("en-US").split(/:| /);
+    return `${hour}:${minute}`
+}
+
+const timestamp_to_date = (timestamp) => {
+    const date = new Date(timestamp*1000);
+    const [month, day, _] = date.toLocaleDateString("en-US").split("/");
+    const month_day = month + '/' + day;
+    return month_day
+}
+
+const fnid_unique_days = (lifts) => {
+    const dates = lifts.map(lift => timestamp_to_date(lift.timestamp));
+    const unique_days = [...new Set(dates)];
+
+    var unique = {};
+    unique_days.forEach(day => { unique[day] = [] });
+    lifts.forEach(lift => {
+        const day = timestamp_to_date(lift.timestamp);
+        unique[day].push(lift);
+    })
+    return unique;
+}
+
+$.getJSON('./assets/json/recent_lifts.json', json => {
     // $('#list-table tbody').empty();
-    for (const day in days) {
-        $('#list-table tbody').append(generate_day(day, Object.keys(days[day]).length));
-    }
 
+    const lifts = json.recent_lifts;
 
-    // const rows = days.map(days);
-});
+    const unique_days = fnid_unique_days(lifts);
 
-/*function addPin(address) {
+    // console.log(unique_days);
 
-    var map = new google.maps.Map(document.getElementById('map'), { 
-        mapTypeId: google.maps.MapTypeId.TERRAIN,
-        zoom: 6
-    });
+    Object.entries(unique_days).forEach(([day, lifts]) => {
+        $('#list-table tbody').append(generate_day(day, Object.keys(lifts).length));
+    })
+    // console.log(lifts); 
 
-    var geocoder = new google.maps.Geocoder();
+    // Object.entries(days).forEach(([day, lift]) => {
+    //     $('#list-table tbody').append(generate_day(day, Object.keys(lift).length));
+    // });
 
-    geocoder.geocode({
-        'address': address
-    }, 
-    function(results, status) {
-        if(status == google.maps.GeocoderStatus.OK) {
-            const infowindow = new google.maps.InfoWindow({
-                content: address + "10:37AM",
-                maxWidth: 200,
-            });
-            new google.maps.Marker({
-                position: results[0].geometry.location,
-                map: map,
-                title: "Bin!"
-            });
-            marker.addListener("click", () => {
-                infowindow.open(map, marker);
-            });
-            map.setCenter(results[0].geometry.location);
+    mapkit.init({
+        authorizationCallback: done => {
+            done('eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjgzQ1dGWjhQNjIifQ.eyJpc3MiOiI1VkdLUDJRVjZIIiwiaWF0IjoxNjE2OTA0NzYzLCJleHAiOjE2MTk1ODMxNjN9.nME9bxXIl3eE1-43BVKu7XmZAyRGfAZGhOOhiIL-mnuyJu2gLq_9vxQQ-Jjly-KUtWAArs0DnHTa9Z4-_F2gYQ');
         }
     });
-}*/
 
-function addPin(lon, lat) {
-    mapkit.init({
-        authorizationCallback: function(done) {
-            done('eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjgzQ1dGWjhQNjIifQ.eyJpc3MiOiI1VkdLUDJRVjZIIiwiaWF0IjoxNjE2OTA0NzYzLCJleHAiOjE2MTk1ODMxNjN9.nME9bxXIl3eE1-43BVKu7XmZAyRGfAZGhOOhiIL-mnuyJu2gLq_9vxQQ-Jjly-KUtWAArs0DnHTa9Z4-_F2gYQ');
-        },
-        language: "en"
+    const geocoder = new mapkit.Geocoder({ getsUserLocation: false });
+
+    const map = new mapkit.Map("map");
+
+    var annotations = [];
+
+    lifts.forEach(lift => {
+
+        geocoder.lookup(lift.address, (err, data) => {
+            
+            const landmark = {
+                coordinate: new mapkit.Coordinate(data.results[0].coordinate.latitude, data.results[0].coordinate.longitude),
+                title: lift.address.split(',')[0],
+                phone: 'Lifted at ' + timestamp_to_time(lift.timestamp),
+                url: '/lift.html?lift_id=' + lift.lift_id
+            };
+
+            const annotation = new mapkit.MarkerAnnotation(landmark.coordinate, {
+                callout: landmarkAnnotationCallout,
+                color: "#c969e0"
+            });
+            annotation.landmark = landmark;
+
+            annotations.push(annotation);
+
+            map.showItems(annotations);
+        });
     });
-    
-    // Landmarks data
-    var sanFranciscoLandmarks = [
-        { coordinate: new mapkit.Coordinate(37.7951315, -122.402986), title: "Transamerica Pyramid", phone: "+1-415-983-5420", url: "http://www.transamericapyramidcenter.com/" },
-        { coordinate: new mapkit.Coordinate(37.7954201, -122.39352), title: "Ferry Building", phone: "+1 (415) 983-8030", url: "http://www.ferrybuildingmarketplace.com" },
-        { coordinate: new mapkit.Coordinate(37.8083396, -122.415727), title: "Fisherman's Wharf", phone: "+1 (415) 673-3530", url: "http://visitfishermanswharf.com" },
-        { coordinate: new mapkit.Coordinate(37.8023553, -122.405742), title: "Coit Tower", phone: "+1 (415) 249-0995", url: "http://sfrecpark.org/destination/telegraph-hill-pioneer-park/coit-tower/" },
-        { coordinate: new mapkit.Coordinate(37.7552305, -122.452624), title: "Sutro Tower", phone: "+1 (415) 681-8850", url: "http://www.sutrotower.com" },
-        { coordinate: new mapkit.Coordinate(37.779267, -122.419269), title: "City Hall", phone: "+1 (415) 701-2311", url: "http://sfgsa.org/index.aspx?page=1085" },
-        { coordinate: new mapkit.Coordinate(37.8184493, -122.478409), title: "Golden Gate Bridge", phone: "+1 (415) 921-5858", url: "http://www.goldengatebridge.org" },
-        { coordinate: new mapkit.Coordinate(37.7785538, -122.514035), title: "Cliff House", phone: "+1 (415) 386-3330", url: "http://www.cliffhouse.com/" }
-    ];
     
     // Landmark annotation callout delegate
     var CALLOUT_OFFSET = new DOMPoint(-148, -78);
@@ -79,19 +97,6 @@ function addPin(lon, lat) {
             return ".4s cubic-bezier(0.4, 0, 0, 1.5) 0s 1 normal scale-and-fadein";
         }
     };
-    
-    // Landmarks annotations
-    var annotations = sanFranciscoLandmarks.map(function(landmark) {
-        var annotation = new mapkit.MarkerAnnotation(landmark.coordinate, {
-            callout: landmarkAnnotationCallout,
-            color: "#c969e0"
-        });
-        annotation.landmark = landmark;
-        return annotation;
-    });
-    
-    var map = new mapkit.Map("map");
-    map.showItems(annotations);
     
     // Landmark annotation custom callout
     function calloutForLandmarkAnnotation(annotation) {
@@ -111,10 +116,8 @@ function addPin(lon, lat) {
         link.className = "homepage";
         var a = link.appendChild(document.createElement("a"));
         a.href = annotation.landmark.url;
-        a.textContent = "website";
+        a.textContent = "more info";
     
         return div;
     }
-}
-
-addPin(1,2);
+});
