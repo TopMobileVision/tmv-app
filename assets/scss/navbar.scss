@@ -1,0 +1,29 @@
+header {
+    display: grid;
+    background: var(--color4);
+    padding: 0.7em;
+    height: 7vh;
+    line-height: 7vh;
+    width: 100%;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    font-family: Montserrat, sans-serif;
+
+    * {
+        color: var(--color1);
+    }
+
+    .navbar {
+        grid-area: 1 / 2 / auto / auto;
+        width: 100%;
+        float: center;
+
+        h3 {
+            margin: auto;
+            float: left;
+            display: flex;
+            height: 100%;
+            width: 100px;
+            text-align: center;
+        }
+    }
+}

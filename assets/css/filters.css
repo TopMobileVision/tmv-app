@@ -1,9 +1,0 @@
-
-.filters > div {
-    margin: 1em;
-    padding: 0.5em;
-    background-color: var(--color-gray-light);
-    border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto; 
-}
