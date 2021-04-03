@@ -16,6 +16,7 @@ const generate_route = (route: string, sum_bins: number, det_bins: number) => {
     return `<tr ${type}><td><mygrid>
     <div id="A">#${route}</div>
     <span id="B">${perc}%</span>
+    <span id="D">Apr. 3</span>
     <div id="C">${rand_city()}</div>
     </mygrid></td></tr>`; 
 };
@@ -29,4 +30,4 @@ for (let step = 0; step < 8; step++) {
 }
 
 
-// $('.routes-container tbody').append(generate_route('0550', 350, 350));
+$('.routes-container tbody').append(generate_route('0550', 350, 350));
