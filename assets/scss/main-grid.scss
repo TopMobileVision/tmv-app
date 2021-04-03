@@ -1,0 +1,28 @@
+// .grid-container {
+    
+//     grid-template-columns: 1fr 0.5fr 2fr 1fr;
+//     grid-template-rows: 20px 50px 1fr 40px 50px;
+//     gap: 0px 0px;
+//     margin-top: 40px;
+// }
+
+// .main-container { 
+    
+    
+    
+//     height: 100%;
+//     margin-top: -20px;
+//     margin-bottom: -40px;
+//     grid-area: 2 / 2 / 5 / 4;
+    
+    
+// }
+
+.grid-bg {
+    display: grid;
+    width: 50em;
+    margin: 0 auto; // center
+    border-right: solid 1px var(--color3); // side borders
+    border-left: solid 1px var(--color3);  // side borders
+    
+}
