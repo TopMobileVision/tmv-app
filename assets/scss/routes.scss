@@ -1,0 +1,77 @@
+.routes-container {
+    width: 100%;
+
+    tbody {
+        width: 100%;
+        // overflow-y: auto;
+        // overflow-x: hidden;
+        // display: inline-block;
+        max-height: 35em;
+
+        > th {
+            position: sticky;
+        }
+    }
+    tbody tr td {
+        background-color: var(--color4);
+        height: 3em;
+
+        mygrid {
+            width: 100%;
+            padding-left: 7px;
+            padding-right: 7px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 2fr 1fr;
+
+            #A {
+                color: var(--color0);
+                font-size: 1.5rem;
+            }
+
+            #B {
+                color: var(--color3);
+                grid-area: 1 / 2 / 3 / auto;
+                height: 100%;
+                align-items: center;
+                text-align: center;
+                display: inline-block;
+                vertical-align: middle;
+                line-height: 2.5em;
+            }
+
+            #C {
+                color: var(--color3);
+                width: 100%;
+                font-size: 0.5rem;
+                grid-area: 2 / 1 / auto / 2;
+                // text-align: center;
+            }
+        }
+
+        &:hover {
+            background-color: var(--color3);
+            
+            mygrid #A, mygrid #B, mygrid #C {
+                color: var(--color4);
+            }
+            
+        }
+
+    }
+
+    .complete h3 {
+        color: var(--green);
+    }
+}
+
+.grid-main {
+    margin-top: 2em;
+    display: grid;
+    height: 35em;
+    grid-template-columns: 2fr 5fr;
+    grid-column-gap: 10px;
+
+    h1 { text-align: center; }
+    & > * { overflow: hidden;}
+}
