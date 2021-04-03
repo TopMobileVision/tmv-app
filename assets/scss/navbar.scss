@@ -1,9 +1,13 @@
+body {
+    margin: 0;
+}
+
 header {
     display: grid;
     background: var(--color4);
     padding: 0.7em;
-    height: 7vh;
-    line-height: 7vh;
+    height: 5vh;
+    line-height: 5vh;
     width: 100%;
     grid-template-columns: 0.5fr 1fr 0.5fr;
     font-family: Montserrat, sans-serif;
