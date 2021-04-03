@@ -1,0 +1,98 @@
+body {
+    background-color: var(--color0);
+}
+
+.head {
+    grid-area: 1 / 2 / auto / auto;
+}
+.grid-main { 
+    h1 { text-align: center; width: 100%; }
+    & > * { overflow: hidden;}
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    // grid-template-rows: 0.12fr 1fr;
+    border-right: solid 1px var(--color3);
+    border-left: solid 1px var(--color3);
+    
+    #A {
+        grid-area: 1 / 1 / auto / auto;
+    }
+
+    #B {
+        grid-area: 1 / 2 / auto / auto;
+    }
+
+    .map-container {
+        grid-area: 2 / 2 / auto / auto; 
+        padding: 10px;
+    }
+}
+
+
+.list-container {
+    grid-area: 3 / 2 / auto / 3; 
+    display: block;
+    overflow: hidden;
+    margin: 10px;
+    margin-right: 0px;
+    /* padding: 5px; */
+    border-radius: 40px;
+    border-left: solid 1px var(--color3);
+    background-color: var(--color4);
+    
+    padding-left: 20px;
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0 5px;
+        width: 100%;
+
+        td {
+            border-radius: 40px;
+            
+            /* background-color: var(--color2); */
+            background-color: clear;
+            color: var(--color1);
+            padding: 15px;
+        
+        }
+
+        tbody tr.selected td {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: var(--color1);
+            color: var(--color4);
+            width: 90%;
+            margin-right: 0px;
+            margin-left: 30px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+    }
+}
+
+.search-container {
+    padding: 20px;
+}
+
+#search-bar {
+    grid-area: 4 / 3 / 5 / auto;
+    /* margin-right: 10px; */
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 22px;
+    /* float: right; */
+    width: 90%;
+    height: 30px;
+    font-size: 14px;
+    padding: 6px;
+    border-radius: 50px;
+    border: solid 1px var(--color3);
+    overflow: hidden;
+    
+}
+
+#search-bar:hover{
+    -webkit-box-shadow: 0px 0px 25px -3px var(--color3); 
+    box-shadow:         0px 0px 25px -3px var(--color3);
+}
