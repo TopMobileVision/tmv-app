@@ -1,5 +1,11 @@
-.routes-container {
+.map-container > #map {
     width: 100%;
+    height: 100%;
+}
+
+table {
+    width: 100%;
+
 
     tbody {
         width: 100%;
@@ -18,8 +24,11 @@
 
         mygrid {
             width: 100%;
-            padding-left: 7px;
-            padding-right: 7px;
+            padding: 3px;
+            padding-left: 10px;
+            align-items: center;
+            justify-content: center;
+
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 2fr 1fr;
@@ -29,37 +38,16 @@
                 font-size: 1.5rem;
             }
 
-            #B {
-                color: var(--color3);
-                grid-area: 1 / 2 / auto / auto;
-                height: 100%;
-                align-items: center;
-                text-align: center;
-                display: inline-block;
-                vertical-align: middle;
-                // line-height: 2.5em;
-            }
+            #B, #C, #D { color: var(--color3); }
+            #B, #D { text-align: center; }
 
-            #C {
-                color: var(--color3);
-                width: 100%;
-                font-size: 0.5rem;
-                grid-area: 2 / 1 / auto / 2;
-                // text-align: center;
-            }
-
-            #D {
-                color: var(--color3);
-                font-size: 0.5rem;
-                text-align: center;
-                grid-area: 2 / 2 / auto / 2;
-            }
+            #C, #D { font-size: 0.5rem; }
         }
 
         &:hover {
             background-color: var(--color3);
             
-            mygrid #A, mygrid #B, mygrid #C {
+            #A, #B, #C, #D {
                 color: var(--color4);
             }
             
@@ -67,7 +55,7 @@
 
     }
 
-    .complete h3 {
+    .complete #B {
         color: var(--green);
     }
 }
@@ -80,5 +68,4 @@
     grid-column-gap: 10px;
 
     h1 { text-align: center; }
-    & > * { overflow: hidden;}
 }
