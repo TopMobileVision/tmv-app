@@ -1,6 +1,11 @@
 {
   "devDependencies": {
     "@types/jquery": "^3.5.5",
+    "@types/node": "^14.14.37",
     "mapkit-typescript": "^5.18.2"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "quokka-jquery-loader": "^0.0.3"
   }
 }
