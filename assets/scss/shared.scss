@@ -1,0 +1,202 @@
+// * CSS Global Variables
+:root {
+    --color0: #f4f4f2;
+    --color1: white;
+    --color2: #e8e8e8;
+    --color3: #bbbfca;
+    --color4: #121231;
+    --green: #02B290;
+}
+
+// * SCSS Local Variables
+$page-width: 50em;
+$page-height: 36em;
+$page-title: 3em;
+$page-content: 30.1em;
+$color-bg: var(--color0);
+
+#title {
+    grid-area: 1 / 1 / auto / 3;
+}
+
+// * Background grid
+container {
+    display: grid;
+    width: $page-width;
+    height: $page-height;
+    margin: 0 auto; // center
+    border-right: solid 1px var(--color3); // side borders
+    border-left: solid 1px var(--color3); // side borders
+
+    grid-template-columns: 12em 36em;
+    grid-template-rows: 1fr 12fr;
+    grid-column-gap: 2em;
+
+    // * The title
+    h1 {
+        text-align: left;
+        padding-left: 1em;
+        height: $page-title;
+        line-height: $page-title;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    
+    table,
+    #map {
+        height: 100%;
+        width: 100%;
+    }
+    #map {
+        margin-right: 7px;
+    }
+
+    table {
+
+        tbody {
+
+            // background-color: indigo;
+            // background-color: red;
+            width: 100%;
+            overflow-y: auto;
+            display: inline-block;
+            max-height: $page-content;
+
+            margin: -2px;
+            margin-top: -4px;
+        }
+
+        tr,td {
+            width: 150%;
+        }
+
+        tbody tr td {
+            margin: 0;
+            padding: 0;
+            background-color: var(--color4);
+            height: 3em;
+
+            row {
+                color: var(--color3);
+                width: 12em;
+                margin: 0 auto;
+                padding: 3px;
+                padding-left: 15px;
+                align-items: center;
+                
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 2fr 1fr;
+                
+                #A {
+                    color: var(--color0);
+                    font-size: 1.5rem;
+                }
+                
+                #B, #D {
+                    text-align: right;
+                    margin-right: 15px;
+                }
+                
+                #C, #D {
+                    font-size: 0.5rem;
+                }
+
+                &.city {
+                    #A{
+                        font-size: 0.7rem;
+                        width: 100%;
+                        text-overflow: ellipsis;
+                        word-wrap: break-word;
+                        // background: coral;
+                        overflow: hidden;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    #B{ font-size: 0.4rem; }
+                    #C, #D { display: none; }
+                }
+            }
+
+            &:hover {
+                background-color: var(--color3);
+
+                #A, #B, #C, #D {
+                    color: var(--color4);
+                }
+
+            }
+
+        }
+
+        .complete #B {
+            color: var(--green);
+        }
+    }
+
+    video {
+        width: 100%;
+        // width: $page-height;
+    }
+}
+
+// * Navbar
+body {
+    margin: 0;
+    background-color: $color-bg;
+}
+
+header {
+    display: grid;
+    background: var(--color4);
+    padding: 0.7em;
+    height: 5vh;
+    line-height: 5vh;
+    width: 100%;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    font-family: Montserrat, sans-serif;
+
+    * {
+        color: var(--color1);
+    }
+
+    .navbar {
+        grid-area: 1 / 2 / auto / auto;
+        width: $page-width;
+        float: center;
+
+        &>h3 {
+            margin: auto;
+            float: left;
+            display: flex;
+            height: 100%;
+            width: 100px;
+            text-align: center;
+        }
+    }
+
+    // * Search bar
+    input {
+        // background-color: green;
+        height: $page-title;
+        margin: 0 auto;
+        margin-top: 1.25%;
+        margin-right: 20px;
+        float: right;
+        align-content: center;
+        vertical-align: middle;
+        height: 2.5em;
+        border-radius: 0;
+        border-width: 0;
+    }
+}
+
+// * Fonts
+@import "https://fonts.googleapis.com/css?family=Montserrat:300,400,700";
+
+body,
+body * {
+    font-family: Montserrat, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
