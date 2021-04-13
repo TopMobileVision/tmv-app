@@ -1,1 +1,0 @@
-body{margin:0}header{display:grid;background:var(--color4);padding:.7em;height:5vh;line-height:5vh;width:100%;grid-template-columns:.5fr 1fr .5fr;font-family:Montserrat,sans-serif}header *{color:var(--color1)}header .navbar{grid-area:1/2/auto/auto;width:50em;float:center}header .navbar h3{margin:auto;float:left;display:flex;height:100%;width:100px;text-align:center}
