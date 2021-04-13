@@ -3,8 +3,6 @@ var param= (arg: string) => {
     return search.has(arg) ? search.get(arg) : 'not found';
 }
 const NUM_ROWS: number = 20;
-const rand_routes: number[] = [...Array(NUM_ROWS)].map(e=>Math.random()*9999|1000);
-const rand_days: number[]   = [...Array(NUM_ROWS)].map(e=>Math.random()*31|1);
 $('#title').text(param('city_id'));
 
 function add_route(route: number, perc: number, day: number) {
@@ -21,8 +19,8 @@ function add_route(route: number, perc: number, day: number) {
 }
 
 for (let i=0; i<NUM_ROWS; i++) {
-    const day: number   = rand_days[i];
-    const route: number = rand_routes[i];
+    const day: number   = Math.random()*31|1;
+    const route: number = Math.random()*9999|1000;
     const perc: number  = parseInt((Math.random()*100).toFixed(0));
     add_route(route, perc, day);
 }
