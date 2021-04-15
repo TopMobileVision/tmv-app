@@ -5,18 +5,18 @@ var param= (arg: string) => {
 
 $('#title').text('Route #' + param('route_id'))
 
-const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
+var rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
 
-const generate_route = (route: string, sum_bins: number, det_bins: number) => {
+function add_day(route: string, sum_bins: number, det_bins: number, day: number) {
     const perc = (det_bins / sum_bins * 100).toFixed(0);
-    const btyp = ['🏪', '🏠'][Math.floor(Math.random()*2];
+    const btyp = ['🏪', '🏠'][Math.floor(Math.random()*2)];
     const type = perc == '100' ? 'class="complete"' : '';
-    return `<tr onclick="document.location = 'lifts.html?route_id=${route}&day=${'Mar ' + day}';" ${type}><td><row>
+    $('tbody').append(`<tr onclick="document.location = 'lifts.html?route_id=${route}&day=${'Mar ' + day}';" ${type}><td><row>
     <div  id="A">Mar ${day}</div>
     <span id="B">${perc}%</span>
     <div  id="C">${btyp} Truck ${rand(1000,9999)}</div>
     <span id="D">missed ${sum_bins-det_bins}</span>
-    </row></td></tr>`; 
+    </row></td></tr>`); 
 };
 
 const days: number[] = [...Array(10)].map(e=>Math.random()*32|1).sort((a, b) => a - b).reverse();
@@ -26,7 +26,7 @@ for (const day of days) {
     const num1 = rand(0, 500);
     const num2 = rand(num1*0.8, num1);
 
-    $('tbody').append(generate_route(`${id}`, num1, num2, day));
+    add_day(`${id}`, num1, num2, day);
 }
 
 // * init mapkit
@@ -36,7 +36,7 @@ mapkit.init({
     }
 });
 
-const map = new mapkit.Map("map", {colorScheme: 'dark'});
+var map = new mapkit.Map("map", {colorScheme: 'dark'});
 
 $.getJSON('http://35.227.154.149:8000/trucks/online_only/', response => {
 
