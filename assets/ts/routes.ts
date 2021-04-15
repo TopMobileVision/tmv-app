@@ -9,9 +9,9 @@ $('#title').text(param('city_id'));
 
 function add_route(route: number, perc: number, day: number) {
 
-    const type = perc == '100' ? 'class="complete"' : '';
+    const type = perc == 100 ? 'class="complete"' : '';
     $('tbody').append(
-        `<tr onclick="document.location = '3-days.html?route_id=${route}';" ${type}><td><row>
+        `<tr onclick="document.location = 'days.html?route_id=${route}';" ${type}><td><row>
         <div  id="A">#${route}</div>
         <span id="B">${perc}%</span>
         <div  id="C">${1}</div>
