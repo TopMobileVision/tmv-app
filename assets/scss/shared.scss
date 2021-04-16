@@ -41,12 +41,13 @@ container {
         margin-bottom: 0;
         margin-top: 0;
     }
-    
+
     table,
     #map {
         height: 100%;
         width: 100%;
     }
+
     #map {
         margin-right: 7px;
     }
@@ -54,11 +55,9 @@ container {
     table {
 
         tbody {
-
-            // background-color: indigo;
-            // background-color: red;
             width: 100%;
             overflow-y: auto;
+            overflow-x: hidden;
             display: inline-block;
             max-height: $page-content;
 
@@ -66,7 +65,8 @@ container {
             margin-top: -4px;
         }
 
-        tr,td {
+        tr,
+        td {
             width: 150%;
         }
 
@@ -83,27 +83,29 @@ container {
                 padding: 3px;
                 padding-left: 15px;
                 align-items: center;
-                
+
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: 2fr 1fr;
-                
+
                 #A {
                     color: var(--color0);
                     font-size: 1.5rem;
                 }
-                
-                #B, #D {
+
+                #B,
+                #D {
                     text-align: right;
                     margin-right: 15px;
                 }
-                
-                #C, #D {
+
+                #C,
+                #D {
                     font-size: 0.5rem;
                 }
 
                 &.city {
-                    #A{
+                    #A {
                         font-size: 0.7rem;
                         width: 100%;
                         text-overflow: ellipsis;
@@ -113,15 +115,25 @@ container {
                         margin: 0;
                         padding: 0;
                     }
-                    #B{ font-size: 0.4rem; }
-                    #C, #D { display: none; }
+
+                    #B {
+                        font-size: 0.4rem;
+                    }
+
+                    #C,
+                    #D {
+                        display: none;
+                    }
                 }
             }
 
             &:hover {
                 background-color: var(--color3);
 
-                #A, #B, #C, #D {
+                #A,
+                #B,
+                #C,
+                #D {
                     color: var(--color4);
                 }
 
@@ -147,23 +159,22 @@ body {
 }
 
 header {
-    display: grid;
     background: var(--color4);
-    padding: 0.7em;
-    height: 5vh;
-    line-height: 5vh;
+    height: 7vh;
+    line-height: 7vh;
     width: 100%;
-    grid-template-columns: 0.5fr 1fr 0.5fr;
-    font-family: Montserrat, sans-serif;
-
+    // grid-template-columns: 0.5fr 1fr 0.5fr;
+    display: flex;
     * {
         color: var(--color1);
     }
 
     .navbar {
-        grid-area: 1 / 2 / auto / auto;
+        margin: 0 auto;
         width: $page-width;
         float: center;
+        padding: 0px 2em;
+        position: relative;
 
         &>h3 {
             margin: auto;
@@ -173,21 +184,20 @@ header {
             width: 100px;
             text-align: center;
         }
-    }
 
-    // * Search bar
-    input {
-        // background-color: green;
-        height: $page-title;
-        margin: 0 auto;
-        margin-top: 1.25%;
-        margin-right: 20px;
-        float: right;
-        align-content: center;
-        vertical-align: middle;
-        height: 2.5em;
-        border-radius: 0;
-        border-width: 0;
+        // * Search bar
+        input {
+            height: $page-title;
+            height: 2.5em;
+            border-radius: 0;
+            border-width: 0;
+            text-transform: uppercase;
+
+            position:absolute;
+            right: 3em;
+            top: 50%;
+            transform: translate(0,-50%);
+        }
     }
 }
 
@@ -199,4 +209,34 @@ body * {
     font-family: Montserrat, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+}
+
+@media only screen and (max-width: 600px) {
+    $page-width: 100vw;
+    
+    header {
+        width: 100vw;
+        .navbar {
+            width: 100vw;
+        }
+        input {
+            margin: 0;
+            // height: 100vh;
+            width: 50vw;
+        }
+    }
+    
+    container {
+        display:block;
+
+    }
+    table, tbody, td, th, tr, row { width: 100vw; }
+    table {
+        margin: 0;
+        margin-left: 50vw - 30vw;
+        
+    }
+    .map-container {
+        display: none;
+    }
 }
