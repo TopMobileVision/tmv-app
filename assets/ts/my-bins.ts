@@ -57,38 +57,39 @@ function calloutForLandmarkAnnotation(annotation) {
 
     return div;
 }
-const company_id = 244722;
-$.getJSON(`http://35.227.154.149:8000/${company_id}/bins/`, response => {
+
+const annotation = (tmv_id: string, type: string, content: string, address: string, lat: number, lon: number) => {
+
+    add_bin(address, tmv_id, type, content=='C');
+    var color = '#BDC3C7'; // TR
+    if (type == 'GR') { color = '#03DAC6'; }
+    if (type == 'RC') { color = '#19B5FE'; }
     
+    const coordinate = new mapkit.Coordinate(lat, lon);
 
-    const style = new mapkit.Style({lineWidth: 2, lineJoin: 'round', strokeColor: '#FFF'});
+    const anno = new mapkit.MarkerAnnotation(coordinate, {
+        callout: landmarkAnnotationCallout,
+        color:   color
+    });
+    anno.landmark = {
+        coordinate: coordinate,
+        title: address,
+        phone: tmv_id,
+        url: '/lift.html?lift_id='
+    };
+    anno.glyphText= '🗑️';
 
-    const annotation = (tmv_id: string, type: string, content: string, address: string, lat: number, lon: number) => {
+    return anno;
+}
 
-        add_bin(address, tmv_id, type, content=='C')
-        const landmark = {
-            coordinate: new mapkit.Coordinate(lat, lon),
-            title: address,
-            phone: tmv_id,
-            url: '/lift.html?lift_id='
-        };
+const company_id = parseInt((new URLSearchParams(window.location.search)).get('company_id') || '244722');
 
-        const anno = new mapkit.MarkerAnnotation(landmark.coordinate, {
-            callout: landmarkAnnotationCallout,
-            color:   ['#03DAC6', '#19B5FE', '#BDC3C7'][Math.floor(Math.random()*3)]
-        });
-        anno.landmark = landmark;
-        anno.glyphText= '🗑️';
-
-        return anno;
-    }
-
-    const annotations = Object.values(response['bins']).map(bin => {
+$.getJSON(`http://35.227.154.149:8000/${company_id}/bins/`, response => {
+    const bins = Object.values(response['bins']);
+    console.log(bins);
+    const annotations = bins.map(bin => {
         return annotation(bin[0], bin[1], bin[2], bin[3].split(',')[0], bin[4], bin[5])
     }) 
-    
-
-    console.log(annotations);
 
     map.showItems(annotations);
 
