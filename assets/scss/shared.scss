@@ -191,12 +191,14 @@ header {
             height: 2.5em;
             border-radius: 0;
             border-width: 0;
-            text-transform: uppercase;
-
+            // text-transform: uppercase;
+            padding-left: 12px;
             position:absolute;
             right: 3em;
             top: 50%;
             transform: translate(0,-50%);
+
+            border-radius: 12px
         }
     }
 }
