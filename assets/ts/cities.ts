@@ -1,13 +1,13 @@
 const add_row = (city: string) => {
     $('tbody').append(`<tr onclick="document.location = 'routes.html?city_id=${city}';"><td><row class="city">
-    <span  id="A">${city}</span>
-    <span id="B">${rand(2,90) + ' routes'}</span>
-    </row></td></tr>`); 
+    <span onmouseover="hoverHandler(this)" onmouseout="unhoverHandler(this)" id="A">${city}</span>
+    <span id="B">${rand(2, 90) + ' routes'}</span>
+    </row></td></tr>`);
 };
 
 const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
 
-const rand_color = () => ['#fcc5c0', '#fa9fb5', '#f768a1', '#dd3497', '#ae017e', '#7a0177'][Math.floor(Math.random()*5)];
+const rand_color = () => ['#fcc5c0', '#fa9fb5', '#f768a1', '#dd3497', '#ae017e', '#7a0177'][Math.floor(Math.random() * 5)];
 var LINE_WIDTH_DEFAULT = 0.5;
 var LINE_WIDTH_SELECTED = 3;
 
@@ -40,6 +40,10 @@ function closeInfo() {
     infoPopup.style.display = "none";
 }
 
+
+var towns: string[] = [];
+var all_overlays: mapkit.Overlay[] = [];
+
 // Import GeoJSON data with the shape of the states and their population.
 mapkit.importGeoJSON("assets/data/Neighborhoods-CA.geojson", {
 
@@ -58,13 +62,14 @@ mapkit.importGeoJSON("assets/data/Neighborhoods-CA.geojson", {
     // and set the style (especially the fill color) based on population count.
     itemForFeature: function (overlay, geoJSON) {
 
-        
+
         // Add data to the overlay to be shown when it is selected.
         overlay.data = {
             city: geoJSON.properties.CITY,
             town: geoJSON.properties.NAME
         };
-        add_row(overlay.data.town);
+        // add_row(overlay.data.town);
+        towns.push(overlay?.data.town);
 
         // Find the right color for the population and the set the style.
         overlay.style = new mapkit.Style({
@@ -72,13 +77,17 @@ mapkit.importGeoJSON("assets/data/Neighborhoods-CA.geojson", {
             lineWidth: LINE_WIDTH_DEFAULT,
             fillColor: rand_color()
         });
+
+        all_overlays.push(overlay as mapkit.Overlay);
         return overlay;
     },
 
     // When all the data has been imported, we can show the results.
     geoJSONDidComplete: function (overlays) {
+
         map.addItems(overlays);
         map.showItems(overlays);
+        towns.sort().map(add_row);
     }
 });
 
@@ -97,3 +106,22 @@ map.addEventListener("deselect", function (event) {
         closeInfo();
     }
 });
+
+const hoverHandler = (event: any) => {
+    const overlay = find_overlay(event.innerHTML);
+    overlay.style.lineWidth = LINE_WIDTH_SELECTED;
+    showInfo(overlay.data);
+}
+
+const unhoverHandler = (event: any) => {
+    const overlay = find_overlay(event.innerHTML);
+    overlay.style.lineWidth = LINE_WIDTH_DEFAULT;
+    closeInfo();
+}
+
+const find_overlay = (keyword: string) => {
+    const result = all_overlays.filter(overlay => overlay.data.town === keyword)[0];
+
+    return result;
+}
+// setTimeout(() => { find_overlay('Bay Park') }, 1000);
