@@ -1,25 +1,27 @@
-var param= (arg: string) => {
+var param = (arg: string) => {
     const search = new URLSearchParams(window.location.search);
     return search.has(arg) ? search.get(arg) : 'not found';
 }
 
-$('#title').text('Route #' + param('route_id') + ': ' + param('day'));
+// $('#title').text('Route #' + param('route_id') + ': ' + param('day'));
 
+$('#title').html(`<a href="index.html">Cities</a> › <a href="index.html">${param('city_id')}</a> ›  <a href="days.html?route_id=${param('route_id')}&city_id=${param('city_id')}">R#${param('route_id')}</a> › ${param('day')}`);
 const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
 
-const rand_street = () => ['Elm St', 'Alcala Park', 'Point Loma Bl', 'Wilshire Bl', 'Santa Monica Bl'][Math.floor(Math.random()*5)];
+const rand_street = () => ['Elm St', 'Alcala Park', 'Point Loma Bl', 'Wilshire Bl', 'Santa Monica Bl'][Math.floor(Math.random() * 5)];
 
 function add_lift() {
-    const btyp = ['🏪', '🏠'][Math.floor(Math.random()*2];
+    const address = rand(25, 3000) + ' ' + rand_street();
+    const btyp = ['🏪', '🏠'][Math.floor(Math.random() * 2)];
     $('tbody').append(
-        `<tr onclick="document.location = 'lift.html?lift_id=${1}';"><td><row class="city">
-    <div  id="A">${rand(25, 3000)} ${rand_street()}</div>
+        `<tr onclick="document.location = 'lift.html?lift_id=${1}&address=${address}';"><td><row class="city">
+    <div  id="A">${address}</div>
     <span id="B">12:39PM</span>
     </row></td></tr>`
-    ); 
+    );
 };
 
-for(let i=0; i<20; i++) add_lift()
+for (let i = 0; i < 20; i++) add_lift()
 
 // * init mapkit
 mapkit.init({
@@ -28,23 +30,23 @@ mapkit.init({
     }
 });
 
-const map = new mapkit.Map("map", {colorScheme: 'dark'});
+const map = new mapkit.Map("map", { colorScheme: 'dark' });
 
 const CALLOUT_OFFSET = new DOMPoint(-148, -78);
 const landmarkAnnotationCallout = {
-    calloutElementForAnnotation: function(annotation) {
+    calloutElementForAnnotation: function (annotation) {
         return calloutForLandmarkAnnotation(annotation);
     },
 
-    calloutAnchorOffsetForAnnotation: function(annotation, element) {
+    calloutAnchorOffsetForAnnotation: function (annotation, element) {
         return CALLOUT_OFFSET;
     },
 
-    calloutAppearanceAnimationForAnnotation: function(annotation) {
+    calloutAppearanceAnimationForAnnotation: function (annotation) {
         return ".4s cubic-bezier(0.4, 0, 0, 1.5) 0s 1 normal scale-and-fadein";
     }
 };
-    
+
 // Landmark annotation custom callout
 function calloutForLandmarkAnnotation(annotation) {
     var div = document.createElement("div");
@@ -71,15 +73,15 @@ function calloutForLandmarkAnnotation(annotation) {
 $.getJSON('http://35.227.154.149:8000/trucks/online_only/', response => {
 
     const dvr_id = Object.keys(response)[Math.floor(Math.random() * Object.keys(response).length)];
-    const logs   = response[dvr_id];
-    
-    const style = new mapkit.Style({lineWidth: 2, lineJoin: 'round', strokeColor: '#FFF'});
-    const date = logs.shift();
-    const lat  = logs[logs.length - 2];
-    const lon  = logs[logs.length - 1];
+    const logs = response[dvr_id];
 
-    
-    
+    const style = new mapkit.Style({ lineWidth: 2, lineJoin: 'round', strokeColor: '#FFF' });
+    const date = logs.shift();
+    const lat = logs[logs.length - 2];
+    const lon = logs[logs.length - 1];
+
+
+
     const annotation = (lat: number, lon: number) => {
         const landmark = {
             coordinate: new mapkit.Coordinate(lat, lon),
@@ -87,23 +89,23 @@ $.getJSON('http://35.227.154.149:8000/trucks/online_only/', response => {
             phone: 'Bin was lifted at ' + date,
             url: '/lift.html?lift_id='
         };
-        
+
         const anno = new mapkit.MarkerAnnotation(landmark.coordinate, {
             callout: landmarkAnnotationCallout,
-            color:   ['#03DAC6', '#19B5FE', '#BDC3C7'][Math.floor(Math.random()*3)]
+            color: ['#03DAC6', '#19B5FE', '#BDC3C7'][Math.floor(Math.random() * 3)]
         });
         anno.landmark = landmark;
-        anno.glyphText= '🗑️';
+        anno.glyphText = '🗑️';
 
         return anno;
     }
 
     const len = logs.length;
-    const random_indecies = [...Array(50)].map(e=>Math.random()*len|0);
-    var   annotations = [];
-    
-    for (var coo=[], i=0; i<len-1; i+=2) {
-        const lat: number = logs[i], lon: number = logs[i+1];
+    const random_indecies = [...Array(50)].map(e => Math.random() * len | 0);
+    var annotations = [];
+
+    for (var coo = [], i = 0; i < len - 1; i += 2) {
+        const lat: number = logs[i], lon: number = logs[i + 1];
         if (random_indecies.includes(i)) {
             annotations.push(annotation(lat, lon))
 
@@ -111,10 +113,10 @@ $.getJSON('http://35.227.154.149:8000/trucks/online_only/', response => {
         }
         coo.push(new mapkit.Coordinate(lat, lon));
     }
-    
+
     const line = new mapkit.PolylineOverlay(coo, { style: style });
     map.showItems(annotations);
     map.addOverlays([line]);
     map.showItems([line]);
-    
+
 });
