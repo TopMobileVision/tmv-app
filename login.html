@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Login</title>
+		<link rel="stylesheet" href="assets/css/shared.min.css" />
+		<link rel="stylesheet" href="assets/css/login.min.css" />
+	</head>
+	<body>
+		<!-- NAVIGATION BAR -->
+		<header>
+			<div class="navbar">
+				<h3>TMV</h3>
+				<!-- <input type="search" name="" id="" placeholder="Search" /> -->
+			</div>
+		</header>
+		<div class="login-page">
+			<div class="form">
+				<h1>My Account</h1>
+				<form class="login-form">
+					<input
+						id="username"
+						type="text"
+						placeholder="Enter username"
+						onchange="username_changed()"
+					/>
+					<input
+						id="password"
+						type="password"
+						placeholder="Enter password"
+						onchange="password_changed()"
+					/>
+					<div class="button"><a id="submit" href="index.html">login</a></div>
+
+					<!-- <button onclick="submit();">Login</button> -->
+				</form>
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="assets/js/login.min.js"></script>
+	</body>
+</html>
