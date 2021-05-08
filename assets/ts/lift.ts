@@ -1,14 +1,19 @@
+
 "use strict";
 
-const generate_history = (history: string[]) => {
+const generate_history = (day: number) => {
     return `<tr onclick="document.location = 'lift.html?lift_id=${lift_id}';"><td><row class="city">
-    <span  id="A">${history[0]}</span>
-    <span id="B">TEXT</span>
+    <span  id="A">Sep ${day}</span>
+    <span id="B"></span>
     </row></td></tr>`
 }
 
+const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
+const days: number[] = [...Array(8)].map(_ => rand(8, 31)).sort((a, b) => a - b).reverse()
+
 const generate_video = (url: string) => {
-    return `<source src=".${url}" type="video/mp4"></source>`
+    console.log(url)
+    return `<source src="./assets/media/lift.mp4#t=0,10.26" type="video/mp4"></source>`
 }
 
 const generate_subtitle = (timestamp: number) => {
@@ -21,17 +26,21 @@ const generate_subtitle = (timestamp: number) => {
 const params = new URLSearchParams(window.location.search);
 const lift_id = params.get('lift_id') || '';
 const address = params.get('address');
+const city_id = params.get('city_id');
+const route_id = params.get('route_id');
 
+// Set adddress title
+$('#title').html(`<a href="index.html">Cities</a> › <a href="index.html">${city_id}</a> ›  <a href="days.html?route_id=${route_id}&city_id=${city_id}">R#${route_id}</a> › Sep 8`);
+
+$('#address').text(address)
 const url_api = 'http://35.227.154.149:8000/lifts/?lift_id=' + lift_id;
 
 $.get(url_api, lift => {
 
-    // Set adddress title
-    $('#title').text('Cities › Balboa Park › R#3563 › Mar 27');//.text(address.toUpperCase());
 
     // Populate Previous Lifts table
     const history = Object.entries(lift.previous_lifts);
-    const rows = history.map(generate_history);
+    const rows = days.map(generate_history);
     $('tbody').html(rows);
 
     // Generate info cards
