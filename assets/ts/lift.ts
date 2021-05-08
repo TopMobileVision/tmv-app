@@ -12,7 +12,6 @@ const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min
 const days: number[] = [...Array(8)].map(_ => rand(8, 31)).sort((a, b) => a - b).reverse()
 
 const generate_video = (url: string) => {
-    console.log(url)
     return `<source src="./assets/media/lift.mp4#t=0,10.26" type="video/mp4"></source>`
 }
 
