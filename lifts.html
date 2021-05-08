@@ -1,42 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>TMV</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TMV</title>
+		<link rel="stylesheet" href="assets/css/map.min.css" />
+		<link rel="stylesheet" href="assets/css/shared.min.css" />
+		<link rel="stylesheet" href="assets/css/map-regions.min.css" />
+	</head>
 
-    <link rel="stylesheet" href="assets/css/shared.min.css" />
-    <link rel="stylesheet" href="assets/css/map-regions.min.css" />
-</head>
+	<body>
+		<!-- NAVIGATION BAR -->
+		<header>
+			<div class="navbar">
+				<h3>TMV</h3>
+				<input type="search" name="" id="" placeholder="Search" />
+			</div>
+		</header>
 
-<body>
-    <!-- NAVIGATION BAR -->
-    <header>
-        <div class="navbar">
-            <h3>TMV</h3>
-            <input type="search" name="" id="" placeholder="Search">
-        </div>
-    </header>
+		<container>
+			<h1 id="title">Lifts</h1>
 
-    <container>
+			<table>
+				<tbody></tbody>
+			</table>
 
-        <h1 id="title">Lifts</h1>
+			<div class="map-container">
+				<div id="map"></div>
+			</div>
+		</container>
 
-        <table>
-            <tbody>
-            </tbody>
-        </table>
-
-        <div class="map-container">
-            <div id="map"></div>
-        </div>
-    </container>
-
-    <script src="https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="assets/js/lifts.min.js"></script>
-</body>
-
+		<script src="https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="assets/js/lifts.min.js"></script>
+	</body>
 </html>
